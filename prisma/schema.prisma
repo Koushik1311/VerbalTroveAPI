@@ -1,0 +1,37 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// datasource db {
+//   provider = "postgresql"
+//   url      = env("DATABASE_URL")
+// }
+
+// prisma/schema.prisma
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  directUrl         = env("DIRECT_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model Categories {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @db.Timestamptz(3)
+  title     String   @unique
+  Quotes    Quotes[]
+}
+
+model Quotes {
+  id           String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt    DateTime   @default(now()) @db.Timestamptz(3)
+  updatedAt    DateTime   @updatedAt @db.Timestamptz(3)
+  quote        String     @unique
+  author       String?
+  categories   Categories @relation(fields: [categoriesId], references: [id])
+  categoriesId String     @db.Uuid
+}
