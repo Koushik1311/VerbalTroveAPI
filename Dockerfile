@@ -10,8 +10,11 @@ RUN yarn build
 
 EXPOSE 3301/tcp
 
-# ENV DIRECT_URL="postgres://shiroxkey:wGX7uhJ0FsZt@ep-black-sky-84914549.us-east-2.aws.neon.tech/neondb?connect_timeout=10"
-# ENV DATABASE_URL="postgres://shiroxkey:wGX7uhJ0FsZt@ep-black-sky-84914549-pooler.us-east-2.aws.neon.tech/neondb?pgbouncer=true&connect_timeout=10"
+ARG DIRECT_URL
+ARG DATABASE_URL
+
+ENV DIRECT_URL ${DIRECT_URL}
+ENV DATABASE_URL ${DATABASE_URL}
 
 RUN yarn prisma db push
 
