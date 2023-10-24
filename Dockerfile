@@ -8,7 +8,9 @@ RUN yarn install
 
 RUN yarn build
 
-EXPOSE 5000/tcp
+EXPOSE 3301/tcp
+
+ENV DIRECT_URL="postgres://shiroxkey:wGX7uhJ0FsZt@ep-black-sky-84914549.us-east-2.aws.neon.tech/neondb?connect_timeout=10"
 
 RUN yarn prisma db push
 
