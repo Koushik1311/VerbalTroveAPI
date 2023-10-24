@@ -15,4 +15,4 @@ ENV DATABASE_URL="postgres://shiroxkey:wGX7uhJ0FsZt@ep-black-sky-84914549-pooler
 
 RUN yarn prisma db push
 
-CMD ["yarn", "start:prod"]
+CMD ["yarn", "start"]
